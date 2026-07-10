@@ -31,6 +31,15 @@ Layout-Bausteine nach Referenz: Suchleiste im Hero (Reisezeit/Gäste/Interessen,
 Demo ohne Funktion), Kennzahlen-Karten, die den Hero überlappen, weiße Karten-Grids,
 Segelboot-Logo.
 
+## Seen-Kompass (interaktive Sektion `#seen`)
+
+Drehrad links (Desktop) bzw. Chip-Auswahl (Mobil) mit 5 Seen der Region;
+rechts Info-Panel mit Kennzahlen, Badestellen und Google-Maps-Anfahrtslink.
+Daten liegen in `js/main.js` im `LAKES`-Array.
+**Achtung:** Kennzahlen („ca."-Werte), Entfernungen und Badestellen-Namen sind
+Entwurfs-Platzhalter und müssen vor Launch fachlich geprüft werden; die
+Seeformen sind stilisierte Silhouetten, keine exakten Umrisse.
+
 ## Offene Punkte / To-do
 
 - **Alle Fotos sind Unsplash-Platzhalter** – vor Launch durch lizenzierte, echte

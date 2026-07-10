@@ -265,7 +265,7 @@
             <p>Kraniche, Seeadler, stille Moore – Nationalparkluft nur eine Etappe entfernt.</p>
           </div>
         </article>
-        <article class="trip trip-wide reveal" style="--rd:.32s">
+        <article class="trip reveal" style="--rd:.32s">
           <img src="https://images.unsplash.com/photo-1476673160081-cf065607f449?q=80&w=1600&auto=format&fit=crop" alt="Sanfte Wellen am Strand" loading="lazy">
           <div class="trip-info">
             <span class="tag tag-light">Familie</span>
@@ -273,6 +273,44 @@
             <p>Strandbad, Minigolf, Eis auf die Hand – der klassische Ferientag am Wasser.</p>
           </div>
         </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════ SEEN-KOMPASS ══════════ -->
+  <section class="section lake-explorer" id="seen">
+    <div class="lx-bg" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?q=80&w=2400&auto=format&fit=crop" alt="" loading="lazy">
+    </div>
+    <div class="lx-dial" aria-hidden="true">
+      <div class="lx-ring"></div>
+      <div class="lx-wheel" id="lxWheel"></div>
+    </div>
+    <div class="lx-arrows">
+      <button class="lx-arrow" id="lxPrev" aria-label="Voriger See">↑</button>
+      <button class="lx-arrow" id="lxNext" aria-label="Nächster See">↓</button>
+    </div>
+    <div class="container lx-layout">
+      <div class="lx-info reveal" id="lxInfo" aria-live="polite">
+        <p class="eyebrow on-dark">Seen-Kompass · <span id="lxCounter">01 / 05</span></p>
+        <div class="lx-tabs" id="lxTabs"></div>
+        <h2 id="lxName">Plauer See</h2>
+        <p class="lx-loc"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1a6.5 6.5 0 0 1 6.5 6.5C16.5 12 10 19 10 19S3.5 12 3.5 7.5A6.5 6.5 0 0 1 10 1z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="10" cy="7.5" r="2.4" fill="currentColor"/></svg> <span id="lxLoc"></span></p>
+        <div class="lx-stats">
+          <div><strong id="lxArea"></strong><span>Fläche</span></div>
+          <div><strong id="lxDepth"></strong><span>Tiefe bis</span></div>
+          <div><strong id="lxDist"></strong><span>ab Plau</span></div>
+        </div>
+        <p class="lx-desc" id="lxDesc"></p>
+        <div class="lx-bathing">
+          <span class="lx-bath-label">Badestellen</span>
+          <ul id="lxBaths"></ul>
+        </div>
+        <div class="lx-actions">
+          <a class="btn btn-light" id="lxRoute" href="#" target="_blank" rel="noopener">Anfahrt planen</a>
+          <a class="btn btn-ghost" href="#kontakt">Infos &amp; Karten</a>
+        </div>
       </div>
     </div>
   </section>

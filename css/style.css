@@ -454,25 +454,7 @@ h1 em { color: var(--blue-light); }
 }
 .camping.section-dark::before { right: auto; left: -160px; top: auto; bottom: -140px; }
 
-/* Karten-Graticule auf hellen Kontrastflächen */
-.section-sand {
-  background:
-    linear-gradient(rgba(18, 58, 99, .05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(18, 58, 99, .05) 1px, transparent 1px),
-    var(--ice);
-  background-size: 110px 110px, 110px 110px, auto;
-}
-.section-sand::after {
-  content: "53°27′ N · 12°16′ O";
-  position: absolute;
-  top: 1.6rem;
-  right: 4vw;
-  font-size: .72rem;
-  font-weight: 700;
-  letter-spacing: .24em;
-  color: rgba(18, 58, 99, .3);
-  pointer-events: none;
-}
+.section-sand { background: var(--ice); }
 
 .section-head { max-width: 720px; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
 .section-head.split {
@@ -610,6 +592,222 @@ h1 em { color: var(--blue-light); }
 .trip:hover .trip-info { transform: translateY(0); }
 .trip-info h3 { font-size: clamp(1.2rem, 1.8vw, 1.6rem); margin: .6rem 0 .25rem; color: var(--white); }
 .trip-info p { font-size: .92rem; opacity: .85; max-width: 420px; }
+
+/* ── Seen-Kompass ────────────────────────────── */
+.lake-explorer {
+  position: relative;
+  min-height: 720px;
+  display: flex;
+  align-items: center;
+  background: var(--navy-night);
+  color: var(--white);
+  overflow: hidden;
+  isolation: isolate;
+}
+.lx-bg, .lx-bg img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.lx-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(8, 31, 56, .92) 0%, rgba(8, 31, 56, .72) 45%, rgba(8, 31, 56, .45) 100%);
+}
+
+/* Drehrad links: Kreismittelpunkt liegt außerhalb des Viewports */
+.lx-dial {
+  position: absolute;
+  top: 50%;
+  left: -60px;
+  z-index: 2;
+  pointer-events: none;
+}
+.lx-ring {
+  position: absolute;
+  width: 720px; height: 720px;
+  left: 0; top: 0;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(169, 217, 245, .3);
+  border-radius: 50%;
+}
+.lx-wheel { position: absolute; left: 0; top: 0; }
+.lx-item {
+  position: absolute;
+  left: 0; top: 0;
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  background: none;
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  pointer-events: auto;
+  text-align: left;
+  transition: transform .8s var(--ease), opacity .8s var(--ease);
+  opacity: .55;
+}
+.lx-item svg {
+  width: 64px; height: 64px;
+  flex-shrink: 0;
+  transition: transform .8s var(--ease);
+}
+.lx-item svg path {
+  fill: rgba(255, 255, 255, .22);
+  stroke: rgba(255, 255, 255, .75);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+.lx-item span strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 560;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+.lx-item span small {
+  font-size: .74rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--blue-light);
+  white-space: nowrap;
+}
+.lx-item.active { opacity: 1; }
+.lx-item.active svg { transform: scale(1.35); }
+.lx-item.active svg path { fill: rgba(169, 217, 245, .35); stroke: var(--blue-light); }
+.lx-item.hidden { opacity: 0; pointer-events: none; }
+
+.lx-arrows {
+  position: absolute;
+  left: clamp(1rem, 3vw, 2.5rem);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: grid;
+  gap: .8rem;
+}
+.lx-arrow {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, .5);
+  background: rgba(8, 31, 56, .35);
+  backdrop-filter: blur(4px);
+  color: var(--white);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background .3s, border-color .3s, transform .3s;
+}
+.lx-arrow:hover { background: var(--blue-light); border-color: var(--blue-light); color: var(--navy-deep); transform: scale(1.06); }
+
+/* Info-Panel rechts */
+.lx-layout {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: flex-end;
+  padding: clamp(4rem, 8vw, 6rem) 0;
+}
+.lx-info { width: min(560px, 100%); }
+.lx-info h2 { color: var(--white); font-size: clamp(2.4rem, 4.5vw, 3.6rem); margin-bottom: .3em; }
+.lx-info.switching h2,
+.lx-info.switching .lx-loc,
+.lx-info.switching .lx-stats,
+.lx-info.switching .lx-desc,
+.lx-info.switching .lx-bathing { opacity: 0; transform: translateY(10px); }
+.lx-info h2, .lx-loc, .lx-stats, .lx-desc, .lx-bathing {
+  transition: opacity .3s var(--ease), transform .3s var(--ease);
+}
+.lx-loc {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--blue-light);
+  margin-bottom: 1.4rem;
+}
+.lx-loc svg { width: 16px; height: 16px; }
+.lx-stats {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: start;
+  gap: clamp(1.4rem, 3vw, 2.8rem);
+  padding: 1.1rem 0;
+  margin-bottom: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, .18);
+  border-bottom: 1px solid rgba(255, 255, 255, .18);
+}
+.lx-stats strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.15;
+}
+.lx-stats span {
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(234, 244, 251, .6);
+}
+.lx-desc { color: rgba(255, 255, 255, .88); margin-bottom: 1.4rem; }
+.lx-bathing { margin-bottom: 2rem; }
+.lx-bath-label {
+  display: block;
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--blue-light);
+  margin-bottom: .6rem;
+}
+.lx-bathing ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.lx-bathing li {
+  font-size: .85rem;
+  font-weight: 600;
+  padding: .4rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(169, 217, 245, .45);
+  background: rgba(169, 217, 245, .1);
+}
+.lx-actions { display: flex; gap: .9rem; flex-wrap: wrap; }
+
+/* Mobile: Rad ausblenden, Auswahl über Chips */
+.lx-tabs { display: none; }
+
+@media (max-width: 900px) {
+  .lx-dial, .lx-arrows { display: none; }
+  .lx-layout { justify-content: flex-start; }
+  .lx-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-bottom: 1.4rem;
+  }
+  .lx-tab {
+    font-family: var(--font-body);
+    font-size: .85rem;
+    font-weight: 700;
+    padding: .5rem 1.1rem;
+    border-radius: 999px;
+    border: 1.5px solid rgba(255, 255, 255, .4);
+    background: transparent;
+    color: var(--white);
+    cursor: pointer;
+    transition: background .3s, border-color .3s, color .3s;
+  }
+  .lx-tab.active { background: var(--blue-light); border-color: var(--blue-light); color: var(--navy-deep); }
+}
 
 /* ── Camping ─────────────────────────────────── */
 .camping-grid {
