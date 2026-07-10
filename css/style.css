@@ -794,31 +794,40 @@ h1 em { color: var(--blue-light); }
 }
 .lx-actions { display: flex; gap: .9rem; flex-wrap: wrap; }
 
-/* Mobile: Rad ausblenden, Auswahl über Chips */
 .lx-tabs { display: none; }
 
+/* Mobile: Rad als Bogen am oberen Sektionsrand, aktiver See unten am Bogen */
 @media (max-width: 900px) {
-  .lx-dial, .lx-arrows { display: none; }
-  .lx-layout { justify-content: flex-start; }
-  .lx-tabs {
+  .lx-dial {
+    left: 50%;
+    top: -60px;
+  }
+  .lx-ring { width: 480px; height: 480px; }
+  .lx-item {
+    flex-direction: column;
+    text-align: center;
+    gap: .4rem;
+  }
+  .lx-item svg { width: 48px; height: 48px; }
+  .lx-item span { display: none; }
+  .lx-item.active span { display: block; }
+  .lx-item span strong { font-size: 1rem; white-space: nowrap; }
+  .lx-item span small { font-size: .68rem; }
+
+  .lx-arrows {
+    top: 96px;
+    left: 0;
+    right: 0;
+    transform: none;
     display: flex;
-    flex-wrap: wrap;
-    gap: .5rem;
-    margin-bottom: 1.4rem;
+    justify-content: space-between;
+    padding: 0 1.2rem;
   }
-  .lx-tab {
-    font-family: var(--font-body);
-    font-size: .85rem;
-    font-weight: 700;
-    padding: .5rem 1.1rem;
-    border-radius: 999px;
-    border: 1.5px solid rgba(255, 255, 255, .4);
-    background: transparent;
-    color: var(--white);
-    cursor: pointer;
-    transition: background .3s, border-color .3s, color .3s;
-  }
-  .lx-tab.active { background: var(--blue-light); border-color: var(--blue-light); color: var(--navy-deep); }
+  .lx-arrow { transform: rotate(-90deg); }
+  .lx-arrow:hover { transform: rotate(-90deg) scale(1.06); }
+
+  .lake-explorer { align-items: flex-start; min-height: 0; }
+  .lx-layout { justify-content: flex-start; padding-top: 225px; }
 }
 
 /* ── Camping ─────────────────────────────────── */

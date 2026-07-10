@@ -136,18 +136,27 @@ if (lxWheel) {
     return tab;
   });
 
+  // Mobil sitzt der Kreismittelpunkt über der Sektion: aktiver See zeigt
+  // nach unten (90°), Nachbarn links/rechts am Bogen
+  const mobileMq = window.matchMedia('(max-width: 900px)');
+  const dialConf = () => mobileMq.matches
+    ? { base: 90, radius: 185, step: 40, end: 'translate(-50%, -50%)' }
+    : { base: 0, radius: RADIUS, step: STEP, end: 'translateY(-50%)' };
+
   function layout() {
     const N = LAKES.length;
+    const { base, radius, step, end } = dialConf();
     items.forEach((btn, i) => {
-      // kürzester zirkulärer Abstand, damit das Rad oben wie unten Nachbarn zeigt
+      // kürzester zirkulärer Abstand, damit das Rad zu beiden Seiten Nachbarn zeigt
       const d = ((i - active + N + Math.floor(N / 2)) % N) - Math.floor(N / 2);
-      const angle = d * STEP;
-      btn.style.transform = `rotate(${angle}deg) translateX(${RADIUS}px) rotate(${-angle}deg) translateY(-50%)`;
+      const angle = base + d * step;
+      btn.style.transform = `rotate(${angle}deg) translateX(${radius}px) rotate(${-angle}deg) ${end}`;
       btn.classList.toggle('active', d === 0);
       btn.classList.toggle('hidden', Math.abs(d) > 1);
     });
     tabs.forEach((tab, i) => tab.classList.toggle('active', i === active));
   }
+  mobileMq.addEventListener('change', layout);
 
   function renderInfo() {
     const lake = LAKES[active];
@@ -178,6 +187,21 @@ if (lxWheel) {
 
   document.getElementById('lxPrev').addEventListener('click', () => go(active - 1));
   document.getElementById('lxNext').addEventListener('click', () => go(active + 1));
+
+  // Wischgeste (mobil): horizontal wischen dreht das Rad
+  const lxSection = document.getElementById('seen');
+  let touchX = null, touchY = null;
+  lxSection.addEventListener('touchstart', e => {
+    touchX = e.touches[0].clientX;
+    touchY = e.touches[0].clientY;
+  }, { passive: true });
+  lxSection.addEventListener('touchend', e => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    const dy = e.changedTouches[0].clientY - touchY;
+    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy)) go(active + (dx < 0 ? 1 : -1));
+    touchX = touchY = null;
+  }, { passive: true });
 
   renderInfo();
   layout();
