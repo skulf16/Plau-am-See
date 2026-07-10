@@ -107,26 +107,41 @@
   <!-- ══════════ ERLEBEN / AKTIVITÄTEN ══════════ -->
   <section class="section section-dark" id="erleben">
     <svg class="lake-map" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <!-- stilisierte Seenkette Plau -> Müritz -->
-      <g fill="rgba(169,217,245,.1)" stroke="#A9D9F5" stroke-width="2" stroke-linejoin="round">
-        <path d="M170 320c30-18 62 0 68 34 5 28-10 46-6 76 4 26 17 40 9 66-9 30-45 41-71 27s-31-45-27-73c3-24-7-41-3-67 4-28 12-49 30-63z"/>
-        <path d="M395 415c18-10 40-3 45 14s-6 30-22 36-38 1-44-15 3-27 21-35z"/>
-        <path d="M540 360c28-15 62-4 71 21s-9 47-34 56-60 2-69-24 4-40 32-53z"/>
-        <path d="M735 400c34-12 74-2 80 26s-18 48-52 54-70-6-74-34 12-34 46-46z"/>
-        <path d="M1010 300c38-8 72 16 78 52 5 30-12 48-8 80 4 30 18 46 8 76-11 34-52 48-86 36s-44-48-40-80c3-26-8-44-4-74 4-32 18-82 52-90z"/>
+      <!-- stilisierte Tiefenkarte des Plauer Sees (Entwurfsgrafik, keine exakte Bathymetrie) -->
+      <defs>
+        <path id="psShore" d="M-10 -395 C 90 -385 160 -300 158 -205 C 156 -130 120 -80 128 -5 C 136 65 172 115 165 190 C 156 285 95 380 -5 392 C -105 402 -172 330 -180 240 C -187 165 -155 110 -162 35 C -169 -40 -195 -95 -185 -175 C -172 -280 -110 -405 -10 -395 Z"/>
+      </defs>
+      <g transform="translate(990 440) rotate(6)" stroke="#A9D9F5" fill="rgba(169,217,245,.05)">
+        <use href="#psShore" stroke-width="2.5"/>
+        <use href="#psShore" transform="scale(.8)" stroke-width="1.2" stroke-dasharray="7 7"/>
+        <use href="#psShore" transform="scale(.62)" stroke-width="1.2" stroke-dasharray="7 7"/>
+        <use href="#psShore" transform="scale(.45)" stroke-width="1.2" stroke-dasharray="7 7"/>
+        <use href="#psShore" transform="scale(.3)" stroke-width="1.2" stroke-dasharray="7 7"/>
+        <use href="#psShore" transform="scale(.16)" stroke-width="1.2" stroke-dasharray="4 5"/>
+        <!-- tiefste Stelle -->
+        <g stroke-width="2" stroke-linecap="round">
+          <path d="M-12 -12l24 24M-12 12l24-24"/>
+        </g>
+        <!-- Lotungen -->
+        <g font-family="Albert Sans, sans-serif" font-size="15" font-style="italic" fill="#A9D9F5" stroke="none" opacity=".85">
+          <text x="55" y="-245">6</text>
+          <text x="-50" y="-60">14</text>
+          <text x="35" y="130">19</text>
+          <text x="-95" y="265">9</text>
+          <text x="90" y="-90">11</text>
+        </g>
+        <!-- Stadt am Westufer -->
+        <circle cx="-178" cy="150" r="5" fill="#A9D9F5" stroke="none"/>
       </g>
-      <path d="M150 560C260 500 330 460 400 448S520 430 560 420s120-14 175 4 130 24 190 12 100-40 140-60" fill="none" stroke="#A9D9F5" stroke-width="2" stroke-dasharray="1 12" stroke-linecap="round"/>
-      <g fill="#A9D9F5">
-        <circle cx="150" cy="560" r="5"/>
-        <circle cx="560" cy="300" r="5"/>
-        <circle cx="1120" cy="250" r="5"/>
-      </g>
-      <g font-family="Albert Sans, sans-serif" font-size="15" font-weight="700" letter-spacing="4" fill="#A9D9F5">
-        <text x="170" y="585">PLAU AM SEE</text>
-        <text x="580" y="295">MALCHOW</text>
-        <text x="1140" y="245">WAREN</text>
-        <text x="1000" y="580" opacity=".8">MÜRITZ</text>
-        <text x="120" y="290" opacity=".8">PLAUER SEE</text>
+      <!-- Tiefenlinien-Beschriftung (von außen nach innen) -->
+      <g font-family="Albert Sans, sans-serif" font-size="13" font-weight="700" letter-spacing="2" fill="#A9D9F5">
+        <text x="1182" y="392">0 M</text>
+        <text x="1142" y="404">5 M</text>
+        <text x="1106" y="416">10 M</text>
+        <text x="1072" y="428">15 M</text>
+        <text x="1040" y="440">20 M</text>
+        <text x="1012" y="404">25,5 M</text>
+        <text x="700" y="600" text-anchor="end" letter-spacing="3">PLAU AM SEE</text>
       </g>
     </svg>
     <div class="container">

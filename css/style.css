@@ -437,14 +437,14 @@ h1 em { color: var(--blue-light); }
   isolation: isolate;
   overflow: hidden;
 }
-/* Stilisierte Seenkarte im Hintergrund (Erleben-Sektion) */
+/* Stilisierte Tiefenkarte im Hintergrund (Erleben-Sektion) */
 .lake-map {
   position: absolute;
   inset: 0;
   z-index: -1;
   width: 100%;
   height: 100%;
-  opacity: .12;
+  opacity: .14;
   pointer-events: none;
 }
 
