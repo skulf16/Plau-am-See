@@ -139,8 +139,10 @@ if (lxWheel) {
   // Mobil sitzt der Kreismittelpunkt über der Sektion: aktiver See zeigt
   // nach unten (90°), Nachbarn links/rechts am Bogen
   const mobileMq = window.matchMedia('(max-width: 900px)');
+  // Mobil: step negativ, damit der vorige See links, der nächste rechts
+  // am Bogen sitzt – passend zu den Pfeilen und der Wischrichtung
   const dialConf = () => mobileMq.matches
-    ? { base: 90, radius: 185, step: 40, end: 'translate(-50%, -50%)' }
+    ? { base: 90, radius: 185, step: -40, end: 'translate(-50%, -50%)' }
     : { base: 0, radius: RADIUS, step: STEP, end: 'translateY(-50%)' };
 
   function layout() {

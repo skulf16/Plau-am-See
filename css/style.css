@@ -634,7 +634,7 @@ h1 em { color: var(--blue-light); }
   position: absolute;
   top: 50%;
   left: -60px;
-  z-index: 2;
+  z-index: 4;
   pointer-events: none;
 }
 .lx-ring {
@@ -697,7 +697,7 @@ h1 em { color: var(--blue-light); }
   left: clamp(1rem, 3vw, 2.5rem);
   top: 50%;
   transform: translateY(-50%);
-  z-index: 3;
+  z-index: 5;
   display: grid;
   gap: .8rem;
 }
