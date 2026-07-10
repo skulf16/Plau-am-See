@@ -106,6 +106,29 @@
 
   <!-- ══════════ ERLEBEN / AKTIVITÄTEN ══════════ -->
   <section class="section section-dark" id="erleben">
+    <svg class="lake-map" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <!-- stilisierte Seenkette Plau -> Müritz -->
+      <g fill="rgba(169,217,245,.1)" stroke="#A9D9F5" stroke-width="2" stroke-linejoin="round">
+        <path d="M170 320c30-18 62 0 68 34 5 28-10 46-6 76 4 26 17 40 9 66-9 30-45 41-71 27s-31-45-27-73c3-24-7-41-3-67 4-28 12-49 30-63z"/>
+        <path d="M395 415c18-10 40-3 45 14s-6 30-22 36-38 1-44-15 3-27 21-35z"/>
+        <path d="M540 360c28-15 62-4 71 21s-9 47-34 56-60 2-69-24 4-40 32-53z"/>
+        <path d="M735 400c34-12 74-2 80 26s-18 48-52 54-70-6-74-34 12-34 46-46z"/>
+        <path d="M1010 300c38-8 72 16 78 52 5 30-12 48-8 80 4 30 18 46 8 76-11 34-52 48-86 36s-44-48-40-80c3-26-8-44-4-74 4-32 18-82 52-90z"/>
+      </g>
+      <path d="M150 560C260 500 330 460 400 448S520 430 560 420s120-14 175 4 130 24 190 12 100-40 140-60" fill="none" stroke="#A9D9F5" stroke-width="2" stroke-dasharray="1 12" stroke-linecap="round"/>
+      <g fill="#A9D9F5">
+        <circle cx="150" cy="560" r="5"/>
+        <circle cx="560" cy="300" r="5"/>
+        <circle cx="1120" cy="250" r="5"/>
+      </g>
+      <g font-family="Albert Sans, sans-serif" font-size="15" font-weight="700" letter-spacing="4" fill="#A9D9F5">
+        <text x="170" y="585">PLAU AM SEE</text>
+        <text x="580" y="295">MALCHOW</text>
+        <text x="1140" y="245">WAREN</text>
+        <text x="1000" y="580" opacity=".8">MÜRITZ</text>
+        <text x="120" y="290" opacity=".8">PLAUER SEE</text>
+      </g>
+    </svg>
     <div class="container">
       <div class="section-head reveal">
         <p class="eyebrow on-dark">Aktiv am Wasser</p>
@@ -234,14 +257,14 @@
 
       <div class="trip-grid">
         <article class="trip trip-lg reveal">
-          <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1600&auto=format&fit=crop" alt="Blick über weite Seenlandschaft" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1600&auto=format&fit=crop" alt="Segelboot in der Abenddämmerung" loading="lazy">
           <div class="trip-info">
             <span class="tag tag-light">Bootstour</span>
             <h3>Einmal Seenplatte, bitte</h3>
             <p>Mit dem Fahrgastschiff oder eigenem Boot über Petersdorfer See Richtung Müritz.</p>
           </div>
         </article>
-        <article class="trip reveal" style="--rd:.08s">
+        <article class="trip trip-tall reveal" style="--rd:.08s">
           <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=1200&auto=format&fit=crop" alt="Historische Altstadtgasse" loading="lazy">
           <div class="trip-info">
             <span class="tag tag-light">Stadtbummel</span>
@@ -249,15 +272,7 @@
             <p>Fachwerk, Burgturm und die berühmte Hubbrücke über die Elde.</p>
           </div>
         </article>
-        <article class="trip reveal" style="--rd:.16s">
-          <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=1200&auto=format&fit=crop" alt="Abendlicht über dem Wasser" loading="lazy">
-          <div class="trip-info">
-            <span class="tag tag-light">Panorama</span>
-            <h3>Leuchtturm am Hafen</h3>
-            <p>Das maritime Wahrzeichen – bester Fotospot bei Abendlicht.</p>
-          </div>
-        </article>
-        <article class="trip reveal" style="--rd:.24s">
+        <article class="trip trip-tall reveal" style="--rd:.16s">
           <img src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?q=80&w=1200&auto=format&fit=crop" alt="Sonnenlicht fällt durch Buchenwald" loading="lazy">
           <div class="trip-info">
             <span class="tag tag-light">Natur</span>
@@ -265,7 +280,23 @@
             <p>Kraniche, Seeadler, stille Moore – Nationalparkluft nur eine Etappe entfernt.</p>
           </div>
         </article>
+        <article class="trip reveal" style="--rd:.24s">
+          <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=1200&auto=format&fit=crop" alt="Abendlicht über dem Wasser" loading="lazy">
+          <div class="trip-info">
+            <span class="tag tag-light">Panorama</span>
+            <h3>Leuchtturm am Hafen</h3>
+            <p>Das maritime Wahrzeichen – bester Fotospot bei Abendlicht.</p>
+          </div>
+        </article>
         <article class="trip reveal" style="--rd:.32s">
+          <img src="https://images.unsplash.com/photo-1437482078695-73f5ca6c96e2?q=80&w=1200&auto=format&fit=crop" alt="Klarer Bach fließt durch den Wald" loading="lazy">
+          <div class="trip-info">
+            <span class="tag tag-light">Auf dem Wasser</span>
+            <h3>Paddeln auf der Elde</h3>
+            <p>Mit Kanu oder Kajak durch Schleusen und Schilf – mitten durch die Stadt.</p>
+          </div>
+        </article>
+        <article class="trip trip-wide reveal" style="--rd:.4s">
           <img src="https://images.unsplash.com/photo-1476673160081-cf065607f449?q=80&w=1600&auto=format&fit=crop" alt="Sanfte Wellen am Strand" loading="lazy">
           <div class="trip-info">
             <span class="tag tag-light">Familie</span>

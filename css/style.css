@@ -437,8 +437,19 @@ h1 em { color: var(--blue-light); }
   isolation: isolate;
   overflow: hidden;
 }
-/* Kompassrosen-Wasserzeichen auf dunklen Sektionen */
-.section-dark::before {
+/* Stilisierte Seenkarte im Hintergrund (Erleben-Sektion) */
+.lake-map {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  opacity: .12;
+  pointer-events: none;
+}
+
+/* Kompassrosen-Wasserzeichen (nur Camping-Sektion) */
+.camping.section-dark::before {
   content: "";
   position: absolute;
   z-index: -1;
@@ -451,8 +462,8 @@ h1 em { color: var(--blue-light); }
   background-repeat: no-repeat;
   opacity: .07;
   pointer-events: none;
+  right: auto; left: -160px; top: auto; bottom: -140px;
 }
-.camping.section-dark::before { right: auto; left: -160px; top: auto; bottom: -140px; }
 
 .section-sand { background: var(--ice); }
 
@@ -556,9 +567,10 @@ h1 em { color: var(--blue-light); }
 .trip-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 260px;
+  grid-auto-rows: clamp(240px, 22vw, 310px);
   gap: clamp(1rem, 2vw, 1.5rem);
 }
+.trip-tall { grid-row: span 2; }
 .trip {
   position: relative;
   border-radius: var(--radius);
@@ -1068,7 +1080,7 @@ h1 em { color: var(--blue-light); }
 @media (max-width: 560px) {
   .card-grid { grid-template-columns: 1fr; }
   .trip-grid { grid-template-columns: 1fr; grid-auto-rows: 240px; }
-  .trip-lg, .trip-wide { grid-column: span 1; grid-row: span 1; }
+  .trip-lg, .trip-wide, .trip-tall { grid-column: span 1; grid-row: span 1; }
   .cta-form { flex-direction: column; }
   .footer-grid { grid-template-columns: 1fr; }
   .hs-field { flex: 1 1 100%; }
