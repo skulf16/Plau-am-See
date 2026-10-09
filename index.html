@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Albert+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -32,6 +33,7 @@
         <a href="#erleben">Erleben</a>
         <a href="#kulinarik">Kulinarik</a>
         <a href="#ausfluege">Ausflüge</a>
+        <a href="#karte">Karte</a>
         <a href="#camping">Camping</a>
         <a href="#events">Veranstaltungen</a>
         <a href="#kontakt" class="nav-cta">Urlaub planen</a>
@@ -324,6 +326,36 @@
   </section>
 
 
+  <!-- ══════════ ENTDECKERKARTE ══════════ -->
+  <section class="section section-sand map-section" id="karte">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Entdeckerkarte</p>
+        <h2>Alles auf einen <em>Blick</em></h2>
+        <p class="section-sub">Sehenswertes, Gastronomie, Schifffahrt und Touren – wähl eine Kategorie und entdecke Plau am See auf der Karte.</p>
+      </div>
+
+      <div class="map-filters reveal" role="group" aria-label="Kartenebenen filtern">
+        <button class="map-filter is-active" data-cat="erleben" aria-pressed="true"><span class="mf-dot"></span>Plau erleben</button>
+        <button class="map-filter is-active" data-cat="gastro" aria-pressed="true"><span class="mf-dot"></span>Gastro Guide</button>
+        <button class="map-filter is-active" data-cat="schiff" aria-pressed="true"><span class="mf-dot"></span>Schiff fahren</button>
+        <button class="map-filter is-active" data-cat="komoot" aria-pressed="true"><span class="mf-dot"></span>Komoot-Touren</button>
+      </div>
+
+      <div class="map-wrap reveal">
+        <div id="plauMap" role="application" aria-label="Interaktive Karte von Plau am See"></div>
+      </div>
+
+      <div class="map-legend reveal" aria-hidden="true">
+        <span class="ml-item" data-cat="erleben"><span class="ml-dot"></span>Plau erleben <em id="mlCount-erleben"></em></span>
+        <span class="ml-item" data-cat="gastro"><span class="ml-dot"></span>Gastro Guide <em id="mlCount-gastro"></em></span>
+        <span class="ml-item" data-cat="schiff"><span class="ml-dot"></span>Schiff fahren <em id="mlCount-schiff"></em></span>
+        <span class="ml-item" data-cat="komoot"><span class="ml-dot"></span>Komoot-Touren <em id="mlCount-komoot"></em></span>
+      </div>
+    </div>
+  </section>
+
+
   <!-- ══════════ SEEN-KOMPASS ══════════ -->
   <section class="section lake-explorer" id="seen">
     <div class="lx-bg" aria-hidden="true">
@@ -521,6 +553,7 @@
     </div>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

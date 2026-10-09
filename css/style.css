@@ -605,6 +605,133 @@ h1 em { color: var(--blue-light); }
 .trip-info h3 { font-size: clamp(1.2rem, 1.8vw, 1.6rem); margin: .6rem 0 .25rem; color: var(--white); }
 .trip-info p { font-size: .92rem; opacity: .85; max-width: 420px; }
 
+/* ── Entdeckerkarte ──────────────────────────── */
+.map-section { --c-erleben: #2F7FC2; --c-gastro: #E0953C; --c-schiff: #159AA6; --c-komoot: #6AA64E; }
+
+.map-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .7rem;
+  margin-bottom: 1.4rem;
+}
+.map-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  font-family: var(--font-body);
+  font-size: .95rem;
+  font-weight: 700;
+  padding: .7rem 1.3rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--ice-line);
+  background: var(--white);
+  color: var(--navy-deep);
+  cursor: pointer;
+  transition: border-color .25s, box-shadow .25s, transform .25s, opacity .25s;
+}
+.map-filter:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft); }
+.map-filter .mf-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--dot, var(--blue));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--dot, var(--blue)) 22%, transparent);
+}
+.map-filter[data-cat="erleben"] { --dot: var(--c-erleben); }
+.map-filter[data-cat="gastro"]  { --dot: var(--c-gastro); }
+.map-filter[data-cat="schiff"]  { --dot: var(--c-schiff); }
+.map-filter[data-cat="komoot"]  { --dot: var(--c-komoot); }
+.map-filter.is-active {
+  border-color: var(--dot, var(--blue));
+  color: var(--navy-deep);
+}
+.map-filter:not(.is-active) {
+  opacity: .5;
+  border-style: dashed;
+}
+.map-filter:not(.is-active) .mf-dot { box-shadow: none; background: var(--muted); }
+
+.map-wrap {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--ice-deep);
+}
+#plauMap {
+  height: clamp(360px, 52vh, 560px);
+  width: 100%;
+  background: var(--ice-deep);
+  z-index: 1;
+}
+/* Leaflet-Feinschliff passend zur Blau-Palette */
+.leaflet-container { font-family: var(--font-body); }
+.leaflet-popup-content-wrapper {
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+}
+.leaflet-popup-content { margin: .95rem 1.1rem; }
+.map-pop-cat {
+  display: inline-block;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--dot, var(--blue));
+  margin-bottom: .25rem;
+}
+.map-pop-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--navy-deep); line-height: 1.2; }
+.map-pop-desc { font-size: .88rem; color: var(--muted); margin-top: .3rem; }
+.map-pop-link {
+  display: inline-block;
+  margin-top: .6rem;
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--c-komoot, #6AA64E);
+  text-decoration: none;
+}
+.map-pop-link:hover { text-decoration: underline; }
+
+/* eigener Pin */
+.map-pin {
+  width: 26px; height: 26px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  border: 2.5px solid var(--white);
+  box-shadow: 0 3px 8px -2px rgba(8,31,56,.5);
+}
+.map-pin span {
+  display: block;
+  width: 7px; height: 7px;
+  background: var(--white);
+  border-radius: 50%;
+  margin: 6px auto 0;
+}
+
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+  margin-top: 1.3rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--ice-line);
+}
+.ml-item {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--ink);
+  transition: opacity .25s;
+}
+.ml-item.is-off { opacity: .4; }
+.ml-item .ml-dot { width: 13px; height: 13px; border-radius: 50%; background: var(--dot, var(--blue)); }
+.ml-item[data-cat="erleben"] { --dot: var(--c-erleben); }
+.ml-item[data-cat="gastro"]  { --dot: var(--c-gastro); }
+.ml-item[data-cat="schiff"]  { --dot: var(--c-schiff); }
+.ml-item[data-cat="komoot"]  { --dot: var(--c-komoot); }
+.ml-item em { font-style: normal; color: var(--muted); font-weight: 700; }
+
 /* ── Seen-Kompass ────────────────────────────── */
 .lake-explorer {
   position: relative;

@@ -209,6 +209,81 @@ if (lxWheel) {
   layout();
 }
 
+// ── Entdeckerkarte (Leaflet) ──
+// Hinweis: POIs und Koordinaten sind Entwurfs-Platzhalter – vor Launch
+// durch geprüfte Orte/Geodaten und echte Komoot-Tour-Links ersetzen.
+const mapEl = document.getElementById('plauMap');
+if (mapEl && window.L) {
+  const CAT = {
+    erleben: { label: 'Plau erleben', color: '#2F7FC2' },
+    gastro:  { label: 'Gastro Guide', color: '#E0953C' },
+    schiff:  { label: 'Schiff fahren', color: '#159AA6' },
+    komoot:  { label: 'Komoot-Touren', color: '#6AA64E' }
+  };
+  const POIS = [
+    { cat: 'erleben', name: 'Burgturm & Museum', desc: 'Wahrzeichen der Altstadt mit Aussicht über den See.', ll: [53.4588, 12.2583] },
+    { cat: 'erleben', name: 'Hubbrücke über die Elde', desc: 'Historische Zugbrücke mitten in der Stadt.', ll: [53.4593, 12.2627] },
+    { cat: 'erleben', name: 'Marktplatz & Altstadt', desc: 'Fachwerk, Geschäfte und Cafés im Zentrum.', ll: [53.4576, 12.2601] },
+    { cat: 'erleben', name: 'Strandbad Plau', desc: 'Flach abfallender Badestrand mit Liegewiese.', ll: [53.4536, 12.2694] },
+    { cat: 'erleben', name: 'Klüschenberg', desc: 'Aussichtspunkt und Waldwege über der Stadt.', ll: [53.4603, 12.2521] },
+    { cat: 'gastro',  name: 'Restaurant am Hafen', desc: 'Regionale Küche mit Blick auf die Boote.', ll: [53.4566, 12.2651] },
+    { cat: 'gastro',  name: 'Altstadt-Café', desc: 'Selbstgebackener Kuchen in der Fußgängerzone.', ll: [53.4581, 12.2597] },
+    { cat: 'gastro',  name: 'Fischräucherei am See', desc: 'Frischer Räucherfisch direkt vom Kutter.', ll: [53.4551, 12.2668] },
+    { cat: 'schiff',  name: 'Fahrgastschiff-Anleger', desc: 'Start für Rundfahrten über den Plauer See.', ll: [53.4561, 12.2657] },
+    { cat: 'schiff',  name: 'Marina & Bootsverleih', desc: 'Tret-, Ruder- und Motorboote mieten.', ll: [53.4546, 12.2688] },
+    { cat: 'komoot',  name: 'Elderadweg', desc: 'Flache Radtour am Wasser entlang.', ll: [53.4596, 12.2612], komoot: 'https://www.komoot.com/discover/Plau+am+See' },
+    { cat: 'komoot',  name: 'Seerundweg Plauer See', desc: 'Wanderrunde rund um den See.', ll: [53.4515, 12.2585], komoot: 'https://www.komoot.com/discover/Plau+am+See' }
+  ];
+
+  const map = L.map(mapEl, { scrollWheelZoom: false }).setView([53.4568, 12.2605], 14);
+  // Freie OSM-Standard-Tiles (kein API-Key). Für das Finale kann ein
+  // gestylter Basemap-Layer (z. B. MapTiler/CARTO mit Key) im Blau-Look rein.
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>-Mitwirkende',
+    maxZoom: 19
+  }).addTo(map);
+
+  const groups = {};
+  Object.keys(CAT).forEach(c => { groups[c] = L.layerGroup().addTo(map); });
+
+  POIS.forEach(poi => {
+    const { color, label } = CAT[poi.cat];
+    const icon = L.divIcon({
+      className: '',
+      html: `<div class="map-pin" style="background:${color}"><span></span></div>`,
+      iconSize: [26, 26], iconAnchor: [13, 26], popupAnchor: [0, -24]
+    });
+    const link = poi.komoot
+      ? `<a class="map-pop-link" href="${poi.komoot}" target="_blank" rel="noopener">Tour in Komoot öffnen →</a>` : '';
+    L.marker(poi.ll, { icon })
+      .bindPopup(`<span class="map-pop-cat" style="--dot:${color}">${label}</span>
+        <div class="map-pop-title">${poi.name}</div>
+        <div class="map-pop-desc">${poi.desc}</div>${link}`)
+      .addTo(groups[poi.cat]);
+  });
+
+  setTimeout(() => map.invalidateSize(), 200);
+
+  // Filter-Buttons + Legende
+  const counts = {};
+  POIS.forEach(p => { counts[p.cat] = (counts[p.cat] || 0) + 1; });
+  Object.keys(CAT).forEach(c => {
+    const el = document.getElementById('mlCount-' + c);
+    if (el) el.textContent = '(' + (counts[c] || 0) + ')';
+  });
+
+  document.querySelectorAll('.map-filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const c = btn.dataset.cat;
+      const on = btn.classList.toggle('is-active');
+      btn.setAttribute('aria-pressed', on);
+      if (on) groups[c].addTo(map); else map.removeLayer(groups[c]);
+      const leg = document.querySelector('.ml-item[data-cat="' + c + '"]');
+      if (leg) leg.classList.toggle('is-off', !on);
+    });
+  });
+}
+
 // ── Kulinarik-Scroller ──
 const scroller = document.getElementById('foodScroller');
 document.querySelectorAll('.scroll-btn').forEach(btn =>
